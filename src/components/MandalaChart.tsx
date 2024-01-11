@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import OnePlanChart from './OnePlanChart';
+import html2canvas from 'html2canvas';
 
 const MandalaChart: React.FC = () => {
   const [cellData, setCellData] = useState<string[]>(Array(81).fill(''));
@@ -51,10 +52,30 @@ const MandalaChart: React.FC = () => {
     setCellData(newData);
   };
 
+
+  const tableRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadImage = async () => {
+    if (!tableRef.current) {
+      return;
+    }
+    const canvas = await html2canvas(tableRef.current);
+    const image = canvas.toDataURL('image/png', 1.0);
+  
+    // download image
+    const link = document.createElement('a');
+    link.href = image;
+    link.download = 'Mandara_Chart.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div>
       <h1 className='text-center mt-5'>Mandara Chart</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0px', margin: '50px'}}>
+      <button type='button' className='btn btn-primary mx-3' onClick={handleDownloadImage}>Download as Image</button>
+      <div ref={tableRef} className='p-3' style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0px'}}>
         {Array.from({ length: 9 }).map((_, tableIndex) => (
           <div key={tableIndex}>
             <OnePlanChart

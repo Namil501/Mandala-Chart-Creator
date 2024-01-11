@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
+import './OnePlanChart.css';
 
 interface OnePlanChartProps {
   data: string[];
@@ -21,7 +22,7 @@ const OnePlanChart: React.FC<OnePlanChartProps> = ({ data, updateData }) => {
   };
 
   return (
-    <Table bordered style={{ marginBottom: '0px' }}>
+    <Table className="tableStyle" bordered style={{ marginBottom: '0px' }}>
       <tbody>
         {Array.from({ length: 3 }, (_, rowIndex) => (
           <tr key={rowIndex}>
@@ -29,11 +30,12 @@ const OnePlanChart: React.FC<OnePlanChartProps> = ({ data, updateData }) => {
               const cellIndex = rowIndex * 3 + colIndex;
               return (
 
-                <td key={colIndex} onClick={() => handleCellClick(cellIndex)} style = {{ width: '100px', height: '100px' }}>
+                <td key={colIndex} onClick={() => handleCellClick(cellIndex)}>
                   {editing === cellIndex ? (
-                    <input
-                      type="text"
-                      style = {{ width: '100%', height: '100%' }}
+                    <textarea
+                      style={{ width: '100%', height: '100%', resize: 'none'}}
+                      rows={3}
+                      cols={50}
                       value={data[cellIndex]}
                       onChange={(e) => updateData(cellIndex, e.target.value)}
                       onBlur={handleBlur}
