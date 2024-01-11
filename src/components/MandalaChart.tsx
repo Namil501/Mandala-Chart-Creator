@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OnePlanChart from './OnePlanChart';
 
 const MandalaChart: React.FC = () => {
   const [cellData, setCellData] = useState<string[]>(Array(81).fill(''));
 
-  // マンダラチャートのペアになるセルの箇所
+  // Cells to be paired in a mandala chart
   const pairs = new Map([
     [4, 36],
     [36, 4],
@@ -24,6 +24,20 @@ const MandalaChart: React.FC = () => {
     [44, 76]
   ]);
 
+  // Import data from Local Storage when components are mounted
+  useEffect(() => {
+    const savedData = localStorage.getItem('cellData');
+    if (savedData) {
+      setCellData(JSON.parse(savedData));
+    }
+  }, []);
+
+  // Update Local Storage whenever userData status changes
+  useEffect(() => {
+    localStorage.setItem('cellData', JSON.stringify(cellData));
+  }, [cellData]);
+
+  // Update cell data
   const updateCellData = (tableIndex: number, cellIndex: number, value: string) => {
     const globalIndex = tableIndex * 9 + cellIndex;
     const newData = [...cellData];

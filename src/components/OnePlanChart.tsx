@@ -7,15 +7,15 @@ interface OnePlanChartProps {
 }
 
 const OnePlanChart: React.FC<OnePlanChartProps> = ({ data, updateData }) => {
-  // 各セルの編集ステータス
+  // Edit Status for Each Cell
   const [editing, setEditing] = useState<number | null>(null);
 
-  // セルをクリックしたとき編集モードに変換
+  // Convert cells to edit mode when clicked
   const handleCellClick = (cellIndex: number) => {
     setEditing(editing === cellIndex ? null : cellIndex);
   };
 
-  // 他のところをクリックした時編集モード解除
+  // Turn off edit mode when you click anywhere else
   const handleBlur = () => {
     setEditing(null);
   };

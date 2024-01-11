@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
-import MandalaChart from './components/MandalaChart'; // MandalaChart の正しいパスを指定
+import 'bootstrap/dist/css/bootstrap.min.css';
+import MandalaChart from './components/MandalaChart';
 
 ReactDOM.render(
   <React.StrictMode>
