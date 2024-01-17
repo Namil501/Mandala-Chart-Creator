@@ -42,7 +42,7 @@ const OnePlanChart: React.FC<OnePlanChartProps> = ({ data, updateData }) => {
                       autoFocus
                     />
                   ) : (
-                    <span style = {{ width: '100px', height: '100px' }}>{data[cellIndex]}</span>
+                    <span style = {{ width: '100px', height: '100px', whiteSpace: 'pre-wrap'}}>{data[cellIndex]}</span>
                   )}
                 </td>
               );
